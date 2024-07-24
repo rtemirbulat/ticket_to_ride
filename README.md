@@ -14,7 +14,7 @@ The price of the travel through 3 segments is 10 GBP.
 
 You need to provide an API with 2 functions (endpoints) for a traveller:
 1. Calculate the price of a most optimal travel between two towns in GBP.
-2. Save the ticket to a storage if a traveller has enough money.
+2. Save the ticket to a storage if a traveller has enough money.<br>
 Requirements:<br>
 ● The API to calculate the price should be public.<br>
 ● The service should have layered architecture.<br>
