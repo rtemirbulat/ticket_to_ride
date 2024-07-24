@@ -1,0 +1,85 @@
+CREATE SCHEMA ticket_to_ride;
+
+-- Create City table within the schema
+CREATE TABLE ticket_to_ride.city (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL
+);
+
+-- Create Route table within the schema
+CREATE TABLE ticket_to_ride.route (
+    id SERIAL PRIMARY KEY,
+    city_a VARCHAR(100) NOT NULL,
+    city_b VARCHAR(100) NOT NULL,
+    segments INT NOT NULL
+);
+
+-- Create Ticket table within the schema
+CREATE TABLE ticket_to_ride.ticket (
+    id SERIAL PRIMARY KEY,
+    route_id BIGINT NOT NULL REFERENCES ticket_to_ride.route(id),
+    price DECIMAL(10, 2) NOT NULL,
+    traveller VARCHAR(100) NOT NULL,
+    traveller_amount DECIMAL(10, 2) NOT NULL
+);
+
+-- Create Traveller table within the schema
+CREATE TABLE ticket_to_ride.traveller (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    balance DECIMAL(10, 2) NOT NULL
+);
+
+-- Insert initial data into City table
+INSERT INTO ticket_to_ride.city (name) VALUES
+('London'),
+('Birmingham'),
+('Coventry'),
+('Northhampton'),
+('Reading'),
+('Swindon'),
+('Bristol');
+
+INSERT INTO ticket_to_ride.route (city_a, city_b, segments) VALUES
+('Birmingham', 'Coventry', 1),
+    ('Birmingham', 'Bristol', 3),
+    ('Birmingham', 'Swindon', 4),
+    ('Birmingham', 'Northhampton', 3),
+    ('Birmingham', 'London', 5),
+    ('Birmingham', 'Reading', 6),
+    ('Coventry', 'Birmingham', 1),
+    ('Coventry', 'Northhampton', 2),
+    ('Coventry', 'London', 4),
+    ('Coventry', 'Bristol', 4),
+    ('Coventry', 'Reading', 5),
+    ('Coventry', 'Swindon', 5),
+    ('Northhampton', 'London', 2),
+    ('Northhampton', 'Reading', 3),
+    ('Northhampton', 'Swindon', 7),
+    ('Northhampton', 'Bristol', 6),
+    ('Northhampton', 'Birmingham', 3),
+    ('Northhampton', 'Coventry', 2),
+    ('London', 'Reading', 1),
+    ('London', 'Swindon', 5),
+    ('London', 'Bristol', 7),
+    ('London', 'Northhampton', 2),
+    ('London', 'Coventry', 4),
+    ('London', 'Birmingham', 5),
+    ('Reading', 'London', 1),
+    ('Reading', 'Swindon', 4),
+    ('Reading', 'Bristol', 6),
+    ('Reading', 'Northhampton', 3),
+    ('Reading', 'Coventry', 5),
+    ('Reading', 'Birmingham', 6),
+    ('Swindon', 'Bristol', 2),
+    ('Swindon', 'Reading', 4),
+    ('Swindon', 'London', 5),
+    ('Swindon', 'Birmingham', 4),
+    ('Swindon', 'Coventry', 5),
+    ('Swindon', 'Northhampton', 7),
+    ('Bristol', 'Swindon', 2),
+    ('Bristol', 'Birmingham', 3),
+    ('Bristol', 'Coventry', 4),
+    ('Bristol', 'Northhampton', 6),
+    ('Bristol', 'Reading', 6),
+    ('Bristol', 'London', 7);
